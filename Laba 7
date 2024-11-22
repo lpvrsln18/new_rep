@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Заголовок сторінки</title>
+</head>
+<body>
+<header>
+Шапка сторінки
+</header>
+<main>
+<h1>Мій перший заголовок</h1>
+<p>Мій перший параграф.</p>
+</main>
+<footer>
+Підвал сторінки
+</footer>
+</body>
+</html>
+
+
+<form action='/action_page.html'>
+  Ім’я:<br>
+  <input type='text' name='firstname' value='Mickey'><br>
+  Прізвище:<br>
+  <input type='text' name='lastname' value='Mouse'><br><br>
+  <input type='submit' value='Надіслати'>
+</form>
+
+
+
+$.ajax ({
+url: 'server.php',
+dataType: json,
+method: 'GET',
+success: function(response){
+$('#result').html(response);
+},
+error: function(xhr, status, error){
+console.log('Error: ' + error);
+}
+})
+
