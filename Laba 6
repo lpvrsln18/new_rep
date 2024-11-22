@@ -1,0 +1,128 @@
+<?php
+	try {
+		$a = 1;
+		$b = 0;
+		if($b == 0) throw new Exception("Ділення на 0!");
+		echo $a/$b;
+	}catch(Exception $e){
+		echo "Произошла ошибка - ",
+		$e->getMessage(), 	// Виводить повідомлення
+		" в строке ",
+		$e->getLine(),	// Виводить номер строки
+		" файла ",
+		$e->getFile();	// Виводить им’я файла
+	}
+?>
+
+
+
+<?php
+	сlass MathException extends Exception {
+		function __construct($message) {
+			parent::__construct($message);
+		}
+	}
+	try {
+		$a = 1;
+		$b = 0;
+		if ($b == 0) throw new MathException("Ділення на 0!");
+		echo $a / $b;
+	} catch (MathException $e) {
+		echo "Сталася математична помилка ",
+		$e->getMessage(),
+		" в строке ", $e->getLine(),
+		" файла ", $e->getFile();
+	}
+?>	
+
+
+
+<?php
+	abstract class Car {
+		abstract function startEngine();
+	}
+
+	class InjectorCar extends Car {
+		public function startEngine(){
+			print(‘Інжекторний двигун завівся!’);
+		}
+	}
+
+	$myMegaCar = new InjectorCar();
+	$myMegaCar->startEngine();
+?>
+
+
+
+<?php
+	interface Hand {
+		function UseKeyboard();
+	}
+	interface Foot {
+		function PlayFootball();
+	}
+
+	class Human implements Hand, Foot {
+		public function UseKeyboard(){
+			print(‘Попрацювали з клавіатурою!’);
+		}
+		public function PlayFootball(){
+			print(‘Пограли у футбол!’);
+		}
+	}
+	$vasya = new Human();
+	$vasya->UseKeyboard();
+	$vasya->PlayFootball();
+?>
+
+
+<?php
+	class Mathematics {
+		final function Sum($a,$b){			// Фінальний метод
+			return $a + $b;
+		}
+	}
+	class Algebra extends Mathematics {
+		public function Sum($a,$b){ 		// Виникне помилка
+			$c = $a + $b; 
+			return $c;
+		}
+	}
+?>
+<?php
+	final class Breakfast {					// Фінальний клас
+		function eatFood($food){
+			print(“Скушали $food!”);
+		}
+	}
+	class McBreakfast extends Breakfast {...}// Виникне помилка
+?>
+
+
+<?php
+	class ZendCertifiedEngineer {
+		static $zceCount = 0;			// Статична властивість
+		function __construct(){
+	  		++self::$zceCount;
+		}
+	}
+	$vasya = new ZendCertifiedEngineer();
+	$petya = new ZendCertifiedEngineer();
+	print ('Текущее количество ZCE: ' . ZendCertifiedEngineer::$zceCount);
+?>
+<?php
+	class Rally {
+		static function welcome(){ // Статичний метод
+			print ('Добро пожаловать на ралли');
+		}
+	}
+	print (Rally::welcome());
+?>
+
+
+<?php
+	class Human {}
+	$myBoss = new Human();
+	if($myBoss instanceOf Human)
+		print('Мой Босс – человек!');
+?>
