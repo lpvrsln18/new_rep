@@ -1,0 +1,107 @@
+if($f = fopen("testfile.txt", "w+")){
+	print("Файл відкритий"); 
+}else{ 
+	die("Помилка відкриття файлу"); 
+}
+
+//Приклади
+$f=fopen("http://www.you_domain/test.txt","r");
+$f=fopen("http://ftp.you_domain/test.txt","r");
+
+//Закриваємо
+fclose($f);
+
+fread(int f, int length); //Читаємо файл
+$str = fread($f, 10); //Читаємо перші 10 символів
+$str = fread($f, 12); //Читаємо наступні 12 символів
+fgets(int f[, int length]); //Прочитати рядок з файлу
+fgetss(int f, int length [, string allowable]); //Прочитати рядок з файлу та відкинути HTML-теги
+fgetc(int f); //Зчитує символ із файлу
+
+fwrite(int f, string ws [, int length]) //Пишемо у файл
+fputs // Теж, що і fwrite
+fread($f, 7); //Пишемо у конкретну позицію
+fwrite($f, "Наш текст");
+
+//Можна читати файл не відкриваючи та не закриваючи його
+readfile(string filename);
+//І навіть отримати вміст файлу у вигляді масиву 
+array file(string filename [, int use_include_path]);
+//Ще один варіант прямої роботи з даними
+//Читання
+file_get_contents(string filename)
+//Запис
+file_put_contents(string filename, mixed data[, int flag]);//FILE_APPEND
+
+//Якщо записати масив,
+$array = array("I", "love", "you");
+file_put_contents("test.txt",$array);
+//то отримаємо "Iloveyou"
+
+
+//кінець файлу
+bool feof($f) 
+//Встановлення курсору
+int fseek(int f, int offset [, int whence])
+offset — кількість символів, на які потрібно пересунутись. whence:
+SEEK_SET – рух починається з початку файлу;
+SEEK_CUR - рух йде від поточної позиції;
+SEEK_END - рух йде від кінця файлу.
+//Читаємо останні 10 знаків
+fseek($f, -10, SEEK_END);
+$s = fread($f, 10);
+//Дізнаємось поточну позицію
+$pos = ftell($f);
+rewind($f); //скидання курсору
+
+
+
+file_exists("test.txt"); //Чи існує файл?
+is_file("test.txt"); //Це файл чи директорія?
+is_dir("/tmp");
+//Перевірка статусу
+is_readable("test.txt");
+is_writable("test.txt");
+is_executable("test.txt");
+filesize("test.txt"); //Дізнаємося розмір файлу
+$atime = fileatime("test.txt");
+date("d M Y", $atime); //Дата останнього звернення
+$mtime = filemtime("test.txt");
+date("d M Y", $mtime); //Дата зміни файлу
+$ctime = filectime("test.txt");
+date("d M Y", $ctime); //Дата створення файлу (Windows)
+copy(string source, string destination);//Копіювання файлу
+rename(str oldname, str newname);		 //Перейменування файлу
+unlink(string filename);					 //Видалення файлу
+
+//Поточна директорія 
+getcwd()
+//Зміна директорії
+chdir(string dirname)
+//Створення директорії
+mkdir(string dirname[, int mode])//!0777 
+//Видалення директорії
+rmdir(string dirname)//тільки порожня!
+//Відкриваємо
+$dirhandle = opendir(string dirname)
+//Читаємо
+readdir($dirhandle)
+//Закриваємо
+closedir($dirhandle)
+
+<?php
+	if (isset($_FILES['user_file'])){
+		//Встановлюємо директорію
+		$uploaddir = '/var/www/html/';
+		//Переміщуємо файл із тимчасової директорії сервера
+		if(move_uploaded_file($_FILES['user_file']['tmp_name'],
+			$uploaddir . $_FILES['user_file']['name']))
+			echo "Файл завантажений";
+	}else{?>
+		<form enctype="multipart/form-data" action="index.php" method="POST">
+			<input type="file" name="user_file"><br>
+			<input type="submit" value="Відправити">
+		</form>
+	<?}
+?>
+
