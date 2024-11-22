@@ -1,0 +1,141 @@
+<?php
+	// Опис класу
+	class  MyClass  {
+		// визначення властивостей
+		// визначення методів
+	}
+
+	// Ініціалізація класу (створення об'єкта)
+	$myObj  =  new  MyClass();
+?>
+
+
+<?php
+	// Опис властивостей
+	class MyClass {
+		public $property1;
+		protected $property2 = “value2”;
+		private $property3; 
+	}
+	
+	// Доступ до властивостей класу
+	$myObj = new MyClass();
+	$myObj->property1;
+	
+	// Зміна значення властивостей
+ 	$myObj->property2 = “other_value”;
+?>
+
+
+<?php
+	//  Описание методов
+	class MyClass {
+		function myMethod($var1,$var2){
+	   		// оператори 
+		} 
+	}
+
+	// Виклик методу
+	$myObj = new MyClass();
+	$myObj->myMethod(‘value1’,’value2’);
+?>
+
+
+<?php
+	class MyClass {
+		public $public = 1;
+		protected $protected = 2;
+		private $private = 3;
+		function myMethod(){
+			echo $this->protected;
+			echo $this->private;
+		}
+	}
+	class NewClass extends MyClass {
+		function newMethod(){
+			echo $this->protected;
+			echo $this->private; // Не працює!!!
+		}
+	}
+	$obj = new MyClass();
+	echo $obj->public;
+	$obj->myMethod();
+	$obj1 = new NewClass();
+	$obj1->newMethod();
+	echo $obj->protected;	// Не працює!
+	echo $obj->private;	// Не працює!
+?>
+
+
+<?php
+	class MyClass {
+		public $property1;
+		function myMethod(){
+   			// Висновок значення якості
+			print($this->property1); 
+		}
+		function callMethod(){
+   			// Виклик методу
+			$this->myMethod(); 
+		}
+	}
+?>
+
+
+
+<?php 
+	class MyClass {
+		public $property;
+		function __construct($var){
+			$this->property = $var;
+			echo "Виклика конструктор";
+		}
+		function __destruct(){
+			echo "Виклика деструктор";
+		}
+	}
+
+	//Виклик конструктора
+	$obj = new MyClass(“Значение”);
+
+	//Виклик деструктора
+	unset($obj);
+?>
+
+
+<?php
+	class MyClass {
+		public $property;
+	}
+	$myObj = new MyClass(); // Створюємо об'єкт на базі класу
+	$myObj->property = 1;
+	$myObj2 = $myObj;	// Копирование с стиле PHP4. В PHP5 									// $myObj2 всего лишь ссылка на $myObj
+	$myObj2->property = 2; // Змінюючи $myObj2, ми змінюємо $myObj
+	$myObj3 = clone $myObj;// Копіюємо $myObj з усіма даними. 
+// $myObj і $myObj3 два різні об'єкти
+	$myObj3->property = 3;
+	print($myObj->property); // Друкує 2
+	print($myObj2->property); // Друкує 2
+	print($myObj3->property); // Друкує 3
+?>
+
+
+<?php
+	class Car	{
+		public $numWheels = 4;
+		function printWheels() {
+			echo $this->numWheels;
+		}
+	}
+	
+	class Toyota extends Car {
+		public $country = ‘Japan’;
+		function printCountry() {
+			echo $this->country;
+		}
+	}
+
+	$myCar = new Toyota();
+	$myCar->printWheels();
+	$myCar->printCountry();
+?>
